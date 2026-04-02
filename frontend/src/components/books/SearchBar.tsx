@@ -9,12 +9,17 @@ interface Props {
 
 const SearchBar: React.FC<Props> = ({filters, onChange, isAdmin}) => {
     const [localSearch, setLocalSearch] = useState(filters.search || '');
+    const filtersRef = React.useRef(filters);
+    useEffect(() => {
+        filtersRef.current = filters;
+    }, [filters]);
+
     useEffect(() => {
         const timer = setTimeout(() => {
-            onChange({...filters, search: localSearch, page: 1});
+            onChange({...filtersRef.current, search: localSearch, page: 1});
         }, 400);
         return () => clearTimeout(timer);
-    }, [filters, localSearch, onChange]);
+    }, [localSearch, onChange]);
 
     const handleChange = (key: keyof BookFilters, value: string) => {
         onChange({...filters, [key]: value, page: 1});

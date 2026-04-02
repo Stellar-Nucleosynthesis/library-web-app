@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div>
-                        <h4 className="font-display text-parchment-200 font-semibold mb-3">Explore</h4>
+                        <h4 className="font-display text-parchment-400 font-semibold mb-3">Explore</h4>
                         <ul className="space-y-2">
                             <li><Link to="/catalog"
                                       className="font-sans text-sm text-parchment-400 hover:text-parchment-200 transition-colors">Browse
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div>
-                        <h4 className="font-display text-parchment-200 font-semibold mb-3">Account</h4>
+                        <h4 className="font-display text-parchment-400 font-semibold mb-3">Account</h4>
                         <ul className="space-y-2">
                             <li><Link to="/login"
                                       className="font-sans text-sm text-parchment-400 hover:text-parchment-200 transition-colors">Sign

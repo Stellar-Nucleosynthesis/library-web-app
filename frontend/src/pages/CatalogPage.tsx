@@ -45,7 +45,7 @@ const CatalogPage: React.FC = () => {
         fetchBooks(getFiltersFromParams());
     }, [searchParams, fetchBooks, getFiltersFromParams]);
 
-    const handleFilterChange = (filters: BookFilters) => {
+    const handleFilterChange = useCallback((filters: BookFilters) => {
         const params: Record<string, string> = {};
         if (filters.search)
             params.search = filters.search;
@@ -60,7 +60,7 @@ const CatalogPage: React.FC = () => {
         if (filters.page && filters.page > 1)
             params.page = String(filters.page);
         setSearchParams(params);
-    };
+    }, [setSearchParams]);
 
     const currentFilters = getFiltersFromParams();
 

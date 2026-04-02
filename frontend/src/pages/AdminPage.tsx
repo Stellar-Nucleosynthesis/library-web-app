@@ -63,22 +63,25 @@ const AdminPage: React.FC = () => {
         fetchBooks(filters);
     }, [filters, fetchBooks]);
 
-    useEffect(() => {
-        Promise.all([
+    const fetchStats = useCallback(async () => {
+        const [all, active, inactive, cats] = await Promise.all([
             booksApi.getBooks({limit: 1}),
             booksApi.getBooks({limit: 1, isActive: 'true'}),
             booksApi.getBooks({limit: 1, isActive: 'false'}),
             booksApi.getCategories(),
-        ]).then(([all, active, inactive, cats]) => {
-            setStats({
-                total: all.pagination?.total || 0,
-                active: active.pagination?.total || 0,
-                inactive: inactive.pagination?.total || 0,
-                categories: cats.data?.length || 0,
-            });
-        }).catch(() => {
+        ]);
+        setStats({
+            total: all.pagination?.total || 0,
+            active: active.pagination?.total || 0,
+            inactive: inactive.pagination?.total || 0,
+            categories: cats.data?.length || 0,
         });
-    }, [books]);
+    }, []);
+
+    useEffect(() => {
+        fetchStats().catch(() => {
+        });
+    }, [fetchStats]);
 
     const handleCreate = async (data: Partial<BookFormData>) => {
         if (apiMode === 'graphql') {
@@ -97,6 +100,7 @@ const AdminPage: React.FC = () => {
                 throw new Error(res.message);
         }
         await fetchBooks(filters);
+        await fetchStats();
     };
 
     const handleUpdate = async (data: Partial<BookFormData>) => {
@@ -132,6 +136,7 @@ const AdminPage: React.FC = () => {
         } catch {
             toast.error('Failed to delete book');
         }
+        await fetchStats();
     };
 
     const handleToggleStatus = async (id: string) => {
@@ -162,7 +167,12 @@ const AdminPage: React.FC = () => {
         setDeletingBook(books.find((b) => b._id === id) || null);
     };
 
-    if (!isAdmin) return null;
+    const handleFilterChange = useCallback((f: BookFilters) => {
+        setFilters({...f, limit: 12});
+    }, []);
+
+    if (!isAdmin)
+        return null;
 
     return (
         <div className="page-container animate-fade-in">
@@ -230,7 +240,7 @@ const AdminPage: React.FC = () => {
             </div>
 
             <div className="mb-6">
-                <SearchBar filters={filters} onChange={(f) => setFilters({...f, limit: 12})} isAdmin/>
+                <SearchBar filters={filters} onChange={handleFilterChange} isAdmin/>
             </div>
 
             {loading ? (
