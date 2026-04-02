@@ -2,9 +2,9 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import {body, validationResult} from "express-validator";
 import {v4 as uuidv4} from "uuid";
-import User from "../models/User";
-import {sendVerificationEmail} from "../utils/email";
-import {authenticate} from "../utils/authChecks";
+import User from "../models/User.js";
+import {sendVerificationEmail} from "../utils/email.js";
+import {authenticate} from "../utils/authChecks.js";
 
 const router = express.Router();
 
@@ -166,4 +166,4 @@ router.post('/resend-verification', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

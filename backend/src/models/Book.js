@@ -90,4 +90,4 @@ bookSchema.index({title: 'text', author: 'text', description: 'text'});
 bookSchema.index({category: 1});
 bookSchema.index({isActive: 1});
 
-module.exports = mongoose.model('Book', bookSchema);
+export default mongoose.model('Book', bookSchema);

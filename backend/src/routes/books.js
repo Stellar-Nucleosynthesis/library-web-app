@@ -3,8 +3,8 @@ import fs from "node:fs";
 import express from "express";
 import {body, validationResult} from "express-validator";
 import sanitize from "mongo-sanitize";
-import Book from "../models/Book";
-import {authenticate, optionalAuth, requireAdmin} from "../utils/authChecks";
+import Book from "../models/Book.js";
+import {authenticate, optionalAuth, requireAdmin} from "../utils/authChecks.js";
 
 const router = express.Router();
 
@@ -243,4 +243,4 @@ router.get('/:id/download', authenticate, requireAdmin, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

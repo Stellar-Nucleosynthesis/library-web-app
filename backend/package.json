@@ -1,12 +1,12 @@
 {
   "name": "library-resource-center-server",
+  "type": "module",
   "version": "1.0.0",
   "description": "Library Resource Center Backend",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "seed": "node src/seed.js"
+    "dev": "nodemon src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

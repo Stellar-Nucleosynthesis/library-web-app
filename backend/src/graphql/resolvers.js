@@ -1,4 +1,4 @@
-import Book from '../models/Book';
+import Book from '../models/Book.js';
 import sanitize from 'mongo-sanitize';
 
 const resolvers = {
@@ -139,4 +139,4 @@ const resolvers = {
     },
 };
 
-module.exports = resolvers;
+export default resolvers;

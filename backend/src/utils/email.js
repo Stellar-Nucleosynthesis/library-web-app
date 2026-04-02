@@ -12,7 +12,7 @@ const createTransporter = () => {
     });
 };
 
-const sendVerificationEmail = async (email, firstName, token) => {
+export const sendVerificationEmail = async (email, firstName, token) => {
     const transporter = createTransporter();
     const verifyUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
 
@@ -62,5 +62,3 @@ const sendVerificationEmail = async (email, firstName, token) => {
     };
     return await transporter.sendMail(mailOptions);
 };
-
-module.exports = {sendVerificationEmail};
