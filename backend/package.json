@@ -1,10 +1,31 @@
 {
-  "name": "backend",
+  "name": "library-resource-center-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Library Resource Center Backend",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seed.js"
   },
-  "private": true
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-graphql": "^0.12.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "graphql": "^15.8.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongo-sanitize": "^1.1.0",
+    "mongoose": "^7.8.9",
+    "nodemailer": "^6.9.7",
+    "uuid": "^9.0.0",
+    "xss": "^1.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
