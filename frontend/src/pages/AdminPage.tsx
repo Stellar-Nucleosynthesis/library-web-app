@@ -85,13 +85,11 @@ const AdminPage: React.FC = () => {
 
     const handleCreate = async (data: Partial<BookFormData>) => {
         if (apiMode === 'graphql') {
-            const payload = {
-                ...data,
-                publishedYear: data.publishedYear ? data.publishedYear : undefined,
-                pageCount: data.pageCount ? data.pageCount : undefined,
-            };
-            const res = await graphqlApi.createBook(payload);
-            toast.success(res.message);
+            const res = await graphqlApi.createBook(data);
+            if (res.success)
+                toast.success(res.message || 'Book created!');
+            else
+                throw new Error(res.message);
         } else {
             const res = await booksApi.createBook(data);
             if (res.success)
@@ -106,17 +104,17 @@ const AdminPage: React.FC = () => {
     const handleUpdate = async (data: Partial<BookFormData>) => {
         if (!editingBook) return;
         if (apiMode === 'graphql') {
-            const payload = {
-                ...data,
-                publishedYear: data.publishedYear ? data.publishedYear : undefined,
-                pageCount: data.pageCount ? data.pageCount : undefined,
-            };
-            const res = await graphqlApi.updateBook(editingBook._id, payload);
-            toast.success(res.message);
+            const res = await graphqlApi.updateBook(editingBook._id, data);
+            if (res.success)
+                toast.success(res.message || 'Book updated!');
+            else
+                throw new Error(res.message);
         } else {
             const res = await booksApi.updateBook(editingBook._id, data);
-            if (res.success) toast.success(res.message || 'Book updated!');
-            else throw new Error(res.message);
+            if (res.success)
+                toast.success(res.message || 'Book updated!');
+            else
+                throw new Error(res.message);
         }
         await fetchBooks(filters);
     };

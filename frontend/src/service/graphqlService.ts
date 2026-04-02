@@ -47,21 +47,46 @@ export const graphqlApi = {
     },
 
     createBook: async (input: Record<string, unknown>) => {
+        const {
+            title, author, description, category, path, coverImage,
+            publishedYear, isbn, language, pageCount
+        } = input;
+
         const data = await gql(
             `mutation CreateBook($input: CreateBookInput!) {
-        createBook(input: $input) { success message book { _id title author category isActive createdAt } }
-      }`,
-            {input}
+            createBook(input: $input) { success message book { _id title author category isActive createdAt } }
+        }`,
+            {
+                input: {
+                    title, author, description, category, path, coverImage,
+                    isbn, language,
+                    publishedYear: publishedYear ? parseInt(publishedYear as string, 10) : undefined,
+                    pageCount: pageCount ? parseInt(pageCount as string, 10) : undefined,
+                }
+            }
         );
         return data.createBook as { success: boolean; message: string; book: Book };
     },
 
     updateBook: async (id: string, input: Record<string, unknown>) => {
+        const {
+            title, author, description, category, path, coverImage,
+            publishedYear, isbn, language, pageCount
+        } = input;
+
         const data = await gql(
             `mutation UpdateBook($id: ID!, $input: UpdateBookInput!) {
-        updateBook(id: $id, input: $input) { success message book { _id title author category isActive updatedAt } }
-      }`,
-            {id, input}
+            updateBook(id: $id, input: $input) { success message book { _id title author category isActive updatedAt } }
+        }`,
+            {
+                id,
+                input: {
+                    title, author, description, category, path, coverImage,
+                    isbn, language,
+                    publishedYear: publishedYear ? parseInt(publishedYear as string, 10) : undefined,
+                    pageCount: pageCount ? parseInt(pageCount as string, 10) : undefined,
+                }
+            }
         );
         return data.updateBook as { success: boolean; message: string; book: Book };
     },

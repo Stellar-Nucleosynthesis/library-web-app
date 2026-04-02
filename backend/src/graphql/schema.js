@@ -61,7 +61,8 @@ const schema = buildSchema(`
     publishedYear: Int
     isbn: String
     language: String
-    pageCount: Int
+    pageCount: Number
+    isActive: Boolean
   }
 
   input UpdateBookInput {
@@ -75,6 +76,7 @@ const schema = buildSchema(`
     isbn: String
     language: String
     pageCount: Int
+    isActive: Boolean
   }
 
   type Query {
