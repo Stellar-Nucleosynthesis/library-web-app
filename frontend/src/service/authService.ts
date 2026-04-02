@@ -1,6 +1,6 @@
 import axios from './axios';
-import type {User} from "../models/user";
-import type {AuthResponse} from "../models/auth";
+import type {User} from "@/models/user.ts";
+import type {AuthResponse} from "@/models/auth.ts";
 
 export const authApi = {
     register: async (data: {

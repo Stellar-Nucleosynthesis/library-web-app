@@ -1,6 +1,6 @@
 import axios from './axios';
-import type {Book, BookFilters, BookFormData} from '../models/book';
-import type {ApiResponse} from '../models/api';
+import type {Book, BookFilters, BookFormData} from '@/models/book.ts';
+import type {ApiResponse} from '@/models/api.ts';
 
 export const booksApi = {
     getBooks: async (filters: BookFilters = {}): Promise<ApiResponse<Book[]>> => {

@@ -1,5 +1,5 @@
 import axios from './axios';
-import {Book, BookFilters} from '../models/book';
+import {Book, BookFilters} from '@/models/book.ts';
 
 const gql = async (query: string, variables?: Record<string, unknown>) => {
     const res = await axios.post('/graphql', {query, variables});
