@@ -61,7 +61,7 @@ const schema = buildSchema(`
     publishedYear: Int
     isbn: String
     language: String
-    pageCount: Number
+    pageCount: Int
     isActive: Boolean
   }
 
